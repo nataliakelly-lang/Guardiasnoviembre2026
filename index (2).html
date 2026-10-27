@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guardias Koltin — Noviembre 2026</title>
+<style>
+:root{--vop:#203D2D;--tvd:#237A4A;--voc:#0F2913;--lima:#A6EF34;--gris:#E5E5E5;--beige:#F7F6F0;--blanco:#FFFFFF;--negro:#111111;--r:6px;--sh:0 2px 10px rgba(15,41,19,.13);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:14px;background:var(--beige)}
+body{font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:var(--negro)}
+#topbar{background:var(--voc);color:var(--lima);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh);gap:10px;flex-wrap:wrap}
+#topbar h1{font-size:1.05rem;font-weight:700;letter-spacing:.03em}
+#topbar .sub{font-size:.74rem;color:rgba(166,239,52,.6);margin-top:1px}
+.tbtn{border:none;border-radius:var(--r);padding:6px 14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s}
+#print-btn{background:var(--lima);color:var(--voc)}
+#edit-btn{background:rgba(166,239,52,.2);color:var(--lima);border:1px solid rgba(166,239,52,.4)}
+#edit-btn.on{background:var(--lima);color:var(--voc)}
+#reset-btn{background:rgba(255,80,60,.15);color:#ff6450;border:1px solid rgba(255,80,60,.3);display:none}
+#tabs{display:flex;gap:4px;padding:12px 18px 0;overflow-x:auto;background:var(--beige);border-bottom:2px solid var(--gris);position:sticky;top:49px;z-index:90}
+.tab{padding:7px 15px;border-radius:var(--r) var(--r) 0 0;border:none;background:var(--gris);color:var(--vop);font-size:.8rem;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;transition:.15s}
+.tab.active,.tab:hover{background:var(--tvd);color:var(--lima)}
+#main{max-width:1280px;margin:0 auto;padding:18px 14px 60px}
+.info-bar{background:var(--voc);color:var(--blanco);border-radius:var(--r);padding:14px 20px;margin-bottom:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.info-bar h2{grid-column:1/-1;font-size:.8rem;color:var(--lima);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.info-item{font-size:.77rem;line-height:1.6;color:rgba(255,255,255,.82)}
+.info-item strong{display:block;color:var(--lima);font-size:.67rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1px}
+.wk-panel{display:none}.wk-panel.active{display:block}
+.wk-label{background:var(--tvd);color:var(--lima);padding:8px 16px;font-size:.82rem;font-weight:700;border-radius:var(--r);margin-bottom:12px;letter-spacing:.03em}
+.festivo-note{background:#E3F2FD;border-left:3px solid #1976D2;padding:7px 14px;font-size:.77rem;color:#0D47A1;border-radius:0 var(--r) var(--r) 0;margin-bottom:12px;font-weight:600}
+.card{background:var(--blanco);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:14px;overflow:hidden}
+.chdr{padding:9px 14px;font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--blanco)}
+.chdr.lima{color:var(--lima)}
+.sub-row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:12px}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{padding:7px 8px;font-size:.73rem;font-weight:700;text-align:center;border-right:1px solid rgba(255,255,255,.2);color:var(--blanco)}
+th:last-child{border-right:none}
+td{padding:5px 7px;font-size:.77rem;vertical-align:top;border-right:1px solid var(--gris);border-bottom:1px solid var(--gris);color:var(--voc);line-height:1.5;transition:background .1s}
+td:last-child{border-right:none}
+tr:last-child td{border-bottom:none}
+.ra{background:var(--beige)}.rb{background:var(--blanco)}
+.sh{background:var(--lima)!important;color:var(--voc)!important}
+.sd{background:#f0fcd8}
+body.edit td[data-k]{cursor:pointer}
+body.edit td[data-k]:hover{background:#e6ffc2!important;outline:2px solid var(--lima);outline-offset:-1px}
+td.mod{border-left:3px solid var(--lima)!important}
+td input.ei{width:100%;border:none;outline:none;background:transparent;font-size:.77rem;font-family:inherit;color:var(--voc);padding:0;min-width:60px}
+.cg{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));padding:0 14px 40px;max-width:1280px;margin:0 auto}
+.cc{background:var(--blanco);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.cch{padding:8px 14px;font-size:.8rem;font-weight:700;color:var(--blanco)}
+.cr{display:flex;justify-content:space-between;padding:5px 14px;font-size:.78rem}
+.cr:nth-child(odd){background:var(--beige)}
+.cd{font-weight:700;color:var(--tvd)}.cp{color:#999;font-size:.7rem}
+.btabs{display:flex;gap:6px;padding:16px 14px 0;max-width:1280px;margin:0 auto}
+.bt{padding:6px 16px;border-radius:var(--r) var(--r) 0 0;border:none;background:var(--gris);color:var(--vop);font-size:.8rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s}
+.bt.active,.bt:hover{background:var(--voc);color:var(--lima)}
+#cw{display:none}
+@media print{#topbar,#tabs,.btabs{display:none!important}.wk-panel{display:block!important}.card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <div>
+    <h1>🌿 KOLTIN — GUARDIAS NOVIEMBRE 2026</h1>
+    <div class="sub">CDMX 6/día · SF 1/día · GDL 3/día · 16 Nov día festivo</div>
+  </div>
+  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+    <button id="edit-btn" class="tbtn" onclick="toggleEdit()">✏️ Editar</button>
+    <button id="reset-btn" class="tbtn" onclick="resetAll()">↺ Restablecer</button>
+    <button id="print-btn" class="tbtn" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+</div>
+<div id="tabs"></div>
+<div id="main">
+  <div class="info-bar">
+    <h2>📋 Información general</h2>
+    <div class="info-item"><strong>Horario</strong>9:00 AM – 6:00 PM · 1 hr comida</div>
+    <div class="info-item"><strong>Eventualidades</strong>Cualquier eventualidad avisar a Nat o Lau</div>
+    <div class="info-item"><strong>Sin guardia</strong>Bloquear calendario como HO 9–6 PM</div>
+    <div class="info-item"><strong>16 Nov</strong>Día festivo — sin guardias</div>
+  </div>
+  <div id="weeks"></div>
+</div>
+<div class="btabs">
+  <button class="bt active" onclick="showSec('main',this)">📅 Semanas</button>
+  <button class="bt" onclick="showSec('cw',this)">📊 Conteo</button>
+</div>
+<div id="cw"><div class="cg" id="cg"></div></div>
+
+<script>
+function mkRng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function sShuffle(arr,rng){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const LS="koltin_nov2026_v2";
+let edits={};
+try{edits=JSON.parse(localStorage.getItem(LS)||"{}");}catch(e){}
+try{localStorage.removeItem("koltin_nov2026");}catch(e){}
+function saveEdits(){try{localStorage.setItem(LS,JSON.stringify(edits));}catch(e){}}
+function getVal(key,orig){return edits[key]!==undefined?edits[key]:orig;}
+let editMode=false;
+function toggleEdit(){editMode=!editMode;document.body.classList.toggle("edit",editMode);document.getElementById("edit-btn").textContent=editMode?"✅ Listo":"✏️ Editar";document.getElementById("edit-btn").classList.toggle("on",editMode);document.getElementById("reset-btn").style.display=editMode?"inline-block":"none";}
+function cellClick(td){if(!editMode||td.querySelector("input"))return;const orig=td.textContent.trim();td.dataset.prev=orig;const inp=document.createElement("input");inp.className="ei";inp.value=orig;td.textContent="";td.appendChild(inp);inp.focus();inp.select();function commit(){const v=inp.value.trim();td.textContent=v;if(v!==td.dataset.orig){edits[td.dataset.k]=v;td.classList.add("mod");}else{delete edits[td.dataset.k];td.classList.remove("mod");}saveEdits();}inp.addEventListener("blur",commit);inp.addEventListener("keydown",e=>{if(e.key==="Enter")inp.blur();if(e.key==="Escape"){inp.value=td.dataset.prev;inp.blur();}});}
+function resetAll(){if(!confirm("¿Restablecer todos los cambios al calendario original?"))return;edits={};saveEdits();location.reload();}
+const AÑO=2026,MES=11,MES_N="Noviembre",SEED=20261101;
+const FESTIVOS=new Set([16]);
+const CDMX_REG=[
+  "Adela Burgueño","Andrea Morales","Paulina Esquivel","Maricruz Medrano",
+  "Edgar Torres","Francisco Martínez","Daniel Bojórquez",
+  "Karla Pérez","Ivonne Hernández","Fernanda Cruz","Yasmín Ramírez",
+  "Giovanni Aranda","Fran Hernández","Nikita Álvarez","Uriel Solano",
+  "Natalia Cruz","Aranza Álvarez","Diego Oseguera","Andrés Martínez",
+  "Diego Martínez","Aylin Tafoya","Carlos Morales","Edgar Quini",
+  "Anahí Cruz","Jennie Jiménez","Shanty Echeverria","Salvador Solis",
+  "Julio Merino","Rodrigo Reyes","Gabriela Ávila","Alberto Rosales",
+];
+const CDMX_1PW=["Edgar Tepexicuapa","Cecilia Velarde"];
+const GDL_POOL=["América Sánchez","Enrique Melchor","Moisés Lara","Osmar González",
+                "Alejandro Orozco","Lluvia Puente","Victor Hugo Muñoz"];
+const SF_POOL=["Andrea Corralejo","Eduardo Flores","Edgar Hernández","Susana Esqueda"];
+const REMOTO_2S=["Tatiana Laredo","María del Carmen Ramírez","Marla Corzo","Katya Conde",
+  "Anahí Cruces","Paola Marquez","Belen Botello","Daniela Rojas","Andrea Pineda",
+  "Rosa García","Anel Navarrete","Brenda González","Brandon Tome",
+  "Angélica Hernández","Gustavo Sánchez","Sergio Jiménez","Aketzalli Vidaurri"];
+const HUGO="Hugo Aranda",SANDRA="Sandra Anacoreta";
+const BLOCKED={
+  "Adela Burgueño":   [13,20,23,24,25,26],
+  "Andrea Morales":   [6,20,27],
+  "Cecilia Velarde":  [6,13,27],
+  "Paulina Esquivel": [6,13,20,23,24,25,26,27,30],
+  "Maricruz Medrano": [3,5,10,12,17,19,24,26],
+  "Edgar Torres":     [6,9,10,11,12,13],
+  "Ivonne Hernández": [2],
+  "Fran Hernández":   [6],
+};
+const VIE_FORCED={6:"Adela Burgueño",13:"Andrea Morales",20:"Cecilia Velarde",27:"Adela Burgueño"};
+const NO_J=[];
+function buildCal(){
+  const DL={1:"LUN",2:"MAR",3:"MIÉ",4:"JUE",5:"VIE"};
+  const wd=[],sats=[];
+  let d=new Date(AÑO,MES-1,1);
+  while(d.getMonth()===MES-1){const day=d.getDate(),dow=d.getDay();if(dow===6)sats.push(day);else if(dow!==0&&!FESTIVOS.has(day))wd.push({d:day,lbl:DL[dow]});d.setDate(d.getDate()+1);}
+  const bm={};
+  wd.forEach(({d,lbl})=>{const dt=new Date(AÑO,MES-1,d);const m=d-((dt.getDay()+6)%7);(bm[m]=bm[m]||[]).push({d,lbl});});
+  return Object.keys(bm).map(Number).sort((a,b)=>a-b).map((m,wi)=>{
+    const days=bm[m].sort((a,b)=>a.d-b.d);const f=days[0].d,l=days[days.length-1].d;
+    const sat=sats.find(s=>{const dt=new Date(AÑO,MES-1,s);return s-((dt.getDay()+6)%7)===m;})||null;
+    const hasFestivo=FESTIVOS.has(m)||([...Array(l-f+1)].some((_,i)=>FESTIVOS.has(f+i)));
+    return{label:`Semana ${wi+1}: ${f}–${l} Nov`,days,sat,wi,hasFestivo};
+  });
+}
+function buildSched(targets,weeks,wcap,perDayFn,constraintFn,blocked,forced,rng){
+  blocked=blocked||{};forced=forced||{};
+  const rem={...targets},sched={},wku={},lw={};const allD=[];
+  weeks.forEach(({days,wi})=>{wku[wi]={};days.forEach(({d,lbl})=>{sched[d]=[];allD.push({d,lbl,wi});});});
+  Object.keys(targets).forEach(p=>{lw[p]=-99;});
+  Object.entries(forced).forEach(([ds,person])=>{const d=parseInt(ds);if(sched[d]!==undefined&&!sched[d].includes(person)){sched[d].push(person);const e=allD.find(x=>x.d===d);if(e)wku[e.wi][person]=(wku[e.wi][person]||0)+1;if(rem[person]!==undefined)rem[person]--;lw[person]=allD.findIndex(x=>x.d===d);}});
+  const EDGAR_OFF_WI=new Set([1]);
+  allD.forEach(({d,lbl,wi},idx)=>{
+    const pd=perDayFn(d);if((sched[d]||[]).length>=pd)return;
+    let cands=Object.keys(rem).filter(p=>{if(rem[p]<=0||sched[d].includes(p))return false;if((blocked[p]||[]).includes(d))return false;const cap=EDGAR_OFF_WI.has(wi)&&p!=="Edgar Torres"&&p!=="Maricruz Medrano"?(wcap[p]||99)+1:(wcap[p]||99);if((wku[wi][p]||0)>=cap)return false;return true;});
+    cands=sShuffle(cands,rng).sort((a,b)=>{const fA=allD.slice(idx).filter(x=>!(blocked[a]||[]).includes(x.d)).length;const fB=allD.slice(idx).filter(x=>!(blocked[b]||[]).includes(x.d)).length;const uA=-rem[a]/Math.max(fA,1),uB=-rem[b]/Math.max(fB,1);const gA=-(idx-lw[a]),gB=-(idx-lw[b]);return Math.abs(uA-uB)>0.001?uA-uB:gA-gB;});
+    for(const p of cands){if((sched[d]||[]).length>=pd)break;if(constraintFn&&!constraintFn(p,d,lbl,sched[d],wku[wi]))continue;sched[d].push(p);wku[wi][p]=(wku[wi][p]||0)+1;rem[p]--;lw[p]=idx;}
+  });
+  return sched;
+}
+function cdmxC(p,d,lbl,cur){if((BLOCKED[p]||[]).includes(d))return false;if(p==="Maricruz Medrano"&&["MAR","JUE"].includes(lbl))return false;for(const[a,b]of NO_J){if(p===a&&cur.includes(b))return false;if(p===b&&cur.includes(a))return false;}return true;}
+function buildSats(satDates){
+  const sched={};satDates.forEach(s=>{sched[s]=[];});
+  sShuffle([...REMOTO_2S],mkRng(SEED+1)).forEach((p,i)=>{const s1=satDates[i%satDates.length],s2=satDates[(i+2)%satDates.length];sched[s1].push(p);if(s2!==s1)sched[s2].push(p);else sched[satDates[(i+1)%satDates.length]].push(p);});
+  sched[7].push(HUGO);
+  sched[14].push(SANDRA);
+  sched[21].push("Cecilia Velarde");
+  sched[28].push("Mayra Matias");
+  if(sched[7].includes("Gustavo Sánchez")){sched[7]=sched[7].filter(p=>p!=="Gustavo Sánchez");if(!sched[21].includes("Gustavo Sánchez"))sched[21].push("Gustavo Sánchez");}
+  satDates.forEach(s=>{sched[s]=[...new Set(sched[s])].sort();});
+  return sched;
+}
+function tdCell(key,orig,cls){const v=getVal(key,orig);const mod=edits[key]!==undefined?" mod":"";return`<td class="${cls}${mod}" data-k="${key}" data-orig="${orig}" onclick="cellClick(this)">${v}</td>`;}
+function renderWeek(wk,cs,ss,gs,sats){
+  const{days,sat,label,hasFestivo}=wk;const hasSat=sat!==null;
+  let html=`<div class="wk-label">📅 ${label}</div>`;
+  if(hasFestivo)html+=`<div class="festivo-note">🎌 Lunes 16 de noviembre — Día festivo, sin guardias</div>`;
+  const cMax=Math.max(...days.map(({d})=>(cs[d]||[]).length),hasSat?(sats[sat]||[]).length:0);
+  let t=`<table><thead><tr>`;
+  days.forEach(({d,lbl})=>{const hl=d===30;t+=`<th style="background:${hl?'var(--lima)':'#203D2D'};color:${hl?'var(--voc)':'white'}">${lbl} ${d}${hl?' 🏢':''}</th>`;});
+  if(hasSat)t+=`<th class="sh">SÁB ${sat}</th>`;
+  t+=`</tr></thead><tbody>`;
+  for(let i=0;i<cMax;i++){t+=`<tr>`;days.forEach(({d})=>{t+=tdCell(`c_${d}_${i}`,(cs[d]||[])[i]||"",i%2===0?"ra":"rb");});if(hasSat)t+=tdCell(`s_${sat}_${i}`,(sats[sat]||[])[i]||"","sd");t+=`</tr>`;}
+  t+=`</tbody></table>`;
+  html+=`<div class="card"><div class="chdr lima" style="background:#203D2D">🏙️ GUARDIAS CDMX — ${MES_N} ${AÑO}</div>${t}</div>`;
+  html+=`<div class="sub-row">`;
+  let sf=`<table><thead><tr>`;
+  days.forEach(({d,lbl})=>{sf+=`<th style="background:${d===30?'var(--lima)':'#237A4A'};color:${d===30?'var(--voc)':'white'}">${lbl} ${d}${d===30?' 🏢':''}</th>`;});
+  sf+=`</tr></thead><tbody>`;
+  const sfMax=Math.max(...days.map(({d})=>(ss[d]||[]).length),1);
+  for(let i=0;i<sfMax;i++){sf+=`<tr>`;days.forEach(({d})=>{sf+=tdCell(`sf_${d}_${i}`,(ss[d]||[])[i]||"",i%2===0?"ra":"rb");});sf+=`</tr>`;}
+  sf+=`</tbody></table>`;
+  html+=`<div class="card"><div class="chdr" style="background:#237A4A">🏬 SANTA FE</div>${sf}</div>`;
+  const gMax=Math.max(...days.map(({d})=>(gs[d]||[]).length));
+  let gd=`<table><thead><tr>`;
+  days.forEach(({d,lbl})=>{gd+=`<th style="background:${d===30?'var(--lima)':'#237A4A'};color:${d===30?'var(--voc)':'white'}">${lbl} ${d}${d===30?' 🏢':''}</th>`;});
+  gd+=`</tr></thead><tbody>`;
+  for(let i=0;i<gMax;i++){gd+=`<tr>`;days.forEach(({d})=>{gd+=tdCell(`g_${d}_${i}`,(gs[d]||[])[i]||"",i%2===0?"ra":"rb");});gd+=`</tr>`;}
+  gd+=`</tbody></table>`;
+  html+=`<div class="card"><div class="chdr lima" style="background:#0F2913">🌇 GUARDIAS GDL</div>${gd}</div>`;
+  html+=`</div>`;return html;
+}
+function init(){
+  const weeks=buildCal();const allD=weeks.flatMap(w=>w.days);const satDates=weeks.map(w=>w.sat).filter(Boolean);
+  const cT={};CDMX_REG.forEach(p=>{cT[p]=4;});cT["Paulina Esquivel"]=3;cT["Edgar Torres"]=4;CDMX_1PW.forEach(p=>{cT[p]=4;});
+  const cW={};CDMX_REG.forEach(p=>{cW[p]=2;});CDMX_1PW.forEach(p=>{cW[p]=1;});
+  const forcedC={};Object.entries(VIE_FORCED).forEach(([d,p])=>{forcedC[d]=p;});
+  const cdmx=buildSched(cT,weeks,cW,()=>6,cdmxC,BLOCKED,forcedC,mkRng(SEED));
+  cdmx[30]=[...CDMX_REG,...CDMX_1PW];
+  const gT=Object.fromEntries(GDL_POOL.map((p,i)=>[p,i<4?9:8]));
+  const gW=Object.fromEntries(GDL_POOL.map(p=>[p,3]));
+  const gdl=buildSched(gT,weeks,gW,()=>3,null,{},{},mkRng(SEED+20));
+  gdl[30]=[...GDL_POOL];
+  const sfT=Object.fromEntries(SF_POOL.map(p=>[p,5]));
+  const sfW=Object.fromEntries(SF_POOL.map(p=>[p,2]));
+  const sfRaw=buildSched(sfT,weeks,sfW,()=>1,null,{},{},mkRng(SEED+10));
+  const sf=Object.fromEntries(allD.map(({d})=>[d,sfRaw[d]||[]]));
+  sf[30]=[...SF_POOL];
+  const sats=buildSats(satDates);
+  const tabsEl=document.getElementById("tabs");const weeksEl=document.getElementById("weeks");
+  weeks.forEach((wk,wi)=>{
+    const btn=document.createElement("button");btn.className="tab"+(wi===0?" active":"");btn.textContent=wk.label;
+    btn.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".wk-panel").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById("wp"+wi).classList.add("active");};
+    tabsEl.appendChild(btn);
+    const div=document.createElement("div");div.id="wp"+wi;div.className="wk-panel"+(wi===0?" active":"");div.innerHTML=renderWeek(wk,cdmx,sf,gdl,sats);weeksEl.appendChild(div);
+  });
+  const ac={},ag={},asf={};const tot=allD.length;
+  allD.forEach(({d})=>{(cdmx[d]||[]).forEach(p=>{ac[p]=(ac[p]||0)+1;});(gdl[d]||[]).forEach(p=>{ag[p]=(ag[p]||0)+1;});(sf[d]||[]).forEach(p=>{asf[p]=(asf[p]||0)+1;});});
+  const cgEl=document.getElementById("cg");
+  [{t:"🏙 CDMX",bg:"#203D2D",data:ac},{t:"🌇 GDL",bg:"#237A4A",data:ag},{t:"🏬 SF",bg:"#237A4A",data:asf}].forEach(({t,bg,data})=>{let h=`<div class="cc"><div class="cch" style="background:${bg}">${t}</div>`;Object.entries(data).sort((a,b)=>b[1]-a[1]).forEach(([p,cnt])=>{h+=`<div class="cr"><span>${p}</span><span><b class="cd">${cnt}</b><span class="cp"> (${Math.round(cnt/tot*100)}%)</span></span></div>`;});cgEl.insertAdjacentHTML("beforeend",h+`</div>`);});
+}
+function showSec(id,btn){document.getElementById("main").style.display=id==="main"?"block":"none";document.getElementById("cw").style.display=id==="cw"?"block":"none";document.querySelectorAll(".bt").forEach(b=>b.classList.remove("active"));btn.classList.add("active");}
+init();
+</script>
+</body>
+</html>
